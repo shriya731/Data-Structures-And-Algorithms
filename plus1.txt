@@ -1,0 +1,41 @@
+class Solution {
+    public int[] plusOne(int[] digits) {
+        int n=digits.length;
+        int c;
+        List<Integer> dig= new ArrayList<>();
+        for(int i=0;i<n;i++)
+        {
+            dig.add(digits[i]);
+        }
+        
+        if(dig.get(n-1)==9)
+        {
+            dig.set(n-1,0);
+            c=1;
+            for(int i=n-2;i>=0;i--)
+            {
+                if(c==1)
+                {
+                    dig.set(i,dig.get(i)+c);
+                    c=0;
+                }
+                if(dig.get(i)>9)
+                {
+                     c=dig.get(i)/10;
+                    dig.set(i,dig.get(i)%10);
+                   
+                }
+            }
+            if(c==1)
+            {
+                dig.add(0,1);
+            }
+        }
+        else
+        {
+            dig.set(n-1,dig.get(n-1)+1);
+        }
+        int[] res=dig.stream().mapToInt(i -> i).toArray();
+        return res;
+    }
+}
